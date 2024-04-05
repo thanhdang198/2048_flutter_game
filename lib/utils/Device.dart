@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Device {
   static getRatio(int value) {
     int uiwidth = value is int ? value : 750;
-    return ScreenUtil.mediaQueryData.size.width / uiwidth;
+    return ScreenUtil.defaultSize.width / uiwidth;
   }
 
   static getRpx(double value) {
@@ -12,15 +12,17 @@ class Device {
   }
 
   static getBottomPadding() {
-    return ScreenUtil.mediaQueryData.padding.bottom;
+    // return ScreenUtil.defaultSize..padding.bottom;
+    return 20;
   }
 
   static getTopPadding() {
-    return ScreenUtil.mediaQueryData.padding.top;
+    // return ScreenUtil.mediaQueryData.padding.top;
+    return 20;
   }
 
   static getWidth() {
-    return ScreenUtil.mediaQueryData.size.width;
+    return ScreenUtil.defaultSize.width;
   }
 
   static Platform platform = Platform();

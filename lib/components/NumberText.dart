@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BlockStyle {
-  Color textColor;
-  Color background;
+  Color? textColor;
+  Color? background;
 
   BlockStyle({this.textColor, this.background});
 }
@@ -33,8 +33,8 @@ var styles = Map.fromEntries([
 ]);
 
 class NumberText extends StatelessWidget {
-  final int value;
-  final double size;
+  final int? value;
+  final double? size;
 
   NumberText({this.value, this.size});
 
@@ -45,9 +45,9 @@ class NumberText extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: (this.value ~/ 2048) > 1
-            ? styles[this.value ~/ 2048].background
-            : styles[this.value].background,
+        color: (this.value! ~/ 2048) > 1
+            ? styles[this.value! ~/ 2048]!.background
+            : styles[this.value]!.background,
         border: Border.all(color: Colors.transparent, width: 0),
         borderRadius: BorderRadius.circular(5),
       ),
@@ -56,11 +56,11 @@ class NumberText extends StatelessWidget {
           numberText,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: (this.value ~/ 2048) > 1
-                ? styles[this.value ~/ 2048].textColor
-                : styles[this.value].textColor,
+            color: (this.value! ~/ 2048) > 1
+                ? styles[this.value! ~/ 2048]!.textColor
+                : styles[this.value]!.textColor,
             fontSize:
-                size / (numberText.length <= 2 ? 2 : numberText.length * 0.8),
+                size! / (numberText.length <= 2 ? 2 : numberText.length * 0.8),
           ),
         ),
       ),

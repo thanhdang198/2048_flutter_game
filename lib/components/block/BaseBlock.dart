@@ -4,7 +4,7 @@ import 'package:flutter2048/utils/Screen.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 abstract class BaseBlock extends AnimatedWidget {
-  BaseBlock({Key key, Animation animation})
+  BaseBlock({Key? key, required Animation animation})
       : super(
           key: key,
           listenable: animation,
@@ -14,8 +14,8 @@ abstract class BaseBlock extends AnimatedWidget {
   Widget build(BuildContext context) {
     return StoreConnector<GameState, BlockProps>(
       converter: (store) => BlockProps(
-            blockWidth: Screen.getBlockWidth(store.state.mode),
-            borderWidth: Screen.getBorderWidth(store.state.mode),
+            blockWidth: Screen.getBlockWidth(store.state.mode!),
+            borderWidth: Screen.getBorderWidth(store.state.mode!),
             mode: store.state.mode,
           ),
       builder: buildBlock,
@@ -30,9 +30,9 @@ abstract class BaseBlock extends AnimatedWidget {
 }
 
 class BlockProps {
-  double blockWidth;
-  double borderWidth;
-  int mode;
+  double? blockWidth;
+  double? borderWidth;
+  int? mode;
 
   BlockProps({this.blockWidth, this.borderWidth, this.mode});
 }

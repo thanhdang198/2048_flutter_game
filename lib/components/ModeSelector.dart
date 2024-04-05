@@ -18,22 +18,22 @@ class ModeSelector extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              FlatButton(
-                color: Color(0xff8f7a66),
-                textColor: Colors.white,
-                onPressed: () => vm.onChange(3),
+              ElevatedButton(
+                // color: Color(0xff8f7a66),
+                // textColor: Colors.white,
+                onPressed: () => vm.onChange!(3),
                 child: Text('3 x 3'),
               ),
-              FlatButton(
-                color: Color(0xff8f7a66),
-                textColor: Colors.white,
-                onPressed: () => vm.onChange(4),
+              ElevatedButton(
+                // color: Color(0xff8f7a66),
+                // textColor: Colors.white,
+                onPressed: () => vm.onChange!(4),
                 child: Text('4 x 4'),
               ),
-              FlatButton(
-                color: Color(0xff8f7a66),
-                textColor: Colors.white,
-                onPressed: () => vm.onChange(6),
+              ElevatedButton(
+                // color: Color(0xff8f7a66),
+                // textColor: Colors.white,
+                onPressed: () => vm.onChange!(6),
                 child: Text('6 x 6'),
               ),
             ],
@@ -47,6 +47,6 @@ class ModeSelector extends StatelessWidget {
 class ModeSelectorProps {
   ModeSelectorProps({this.mode, this.onChange});
 
-  int mode;
-  Function onChange;
+  int? mode;
+  Function? onChange;
 }

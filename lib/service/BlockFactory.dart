@@ -7,12 +7,12 @@ import 'package:flutter2048/components/block/StaticBlock.dart';
 import 'package:flutter2048/store/BlockInfo.dart';
 
 class BlockFactory {
-  AnimationController combinController;
-  AnimationController addController;
-  AnimationController moveController;
-  int _mode;
+  late AnimationController combinController;
+  late AnimationController addController;
+  AnimationController? moveController;
+  int? _mode;
 
-  BlockFactory(TickerProvider provider, int mode) {
+  BlockFactory(TickerProvider provider, int? mode) {
     combinController = AnimationController(
         duration: const Duration(milliseconds: 60), vsync: provider);
     addController = AnimationController(
@@ -40,7 +40,7 @@ class BlockFactory {
     }
 
     if (info.needMove && info.needCombine != true) {
-      return MoveBlock(info: info, mode: _mode, controller: moveController);
+      return MoveBlock(info: info, mode: _mode!, controller: moveController!);
     }
 
     return StaticBlock(
@@ -50,7 +50,7 @@ class BlockFactory {
   }
 
   play() {
-    moveController.forward().whenComplete(() {
+    moveController!.forward().whenComplete(() {
       addController.forward();
       combinController.forward().whenComplete(() {
         combinController.reverse();

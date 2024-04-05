@@ -16,7 +16,8 @@ import '../store/GameState.dart';
 class GameStage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 750)..init(context);
+    ScreenUtil.init(context);
+    // ScreenUtil.instance = ScreenUtil(width: 750)..init(context);
     return StoreProvider(
       store: Store<GameState>(
         gameReducer,
@@ -25,12 +26,12 @@ class GameStage extends StatelessWidget {
       ),
       child: StoreConnector<GameState, GameProps>(
         converter: (store) =>
-            GameProps(started: store.state.status.total != null),
+            GameProps(started: store.state.status!.total != null),
         onInit: (store) {
           gameInit(store, 4);
         },
         builder: (context, props) {
-          return props.started
+          return props.started!
               ? Container(
                   margin: EdgeInsets.all(Display.borderMargin),
                   child: Column(
@@ -57,7 +58,7 @@ class GameStage extends StatelessWidget {
 }
 
 class GameProps {
-  bool started;
+  bool? started;
 
   GameProps({this.started});
 }

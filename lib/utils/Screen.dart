@@ -8,9 +8,9 @@ class Screen {
   }
 
   static double getBlockWidth(int gameType) {
-    return (Screen.stageWidth - getBorderWidth(gameType) * (gameType + 1)) /
+    return (Screen.stageWidth! - getBorderWidth(gameType) * (gameType + 1)) /
         gameType;
   }
 
-  static double get stageWidth => Device.getWidth() - Display.borderMargin * 2;
+  static double? get stageWidth => Device.getWidth() - Display.borderMargin * 2;
 }

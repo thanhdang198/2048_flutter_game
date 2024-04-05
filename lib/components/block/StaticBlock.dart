@@ -5,12 +5,12 @@ import 'package:flutter2048/components/block/BaseBlock.dart';
 import 'package:flutter2048/store/BlockInfo.dart';
 
 class StaticBlock extends BaseBlock {
-  final BlockInfo info;
+  final BlockInfo? info;
 
   StaticBlock({
-    Key key,
+    Key? key,
     this.info,
-    AnimationController controller,
+    required AnimationController controller,
   }) : super(
           key: key,
           animation:
@@ -21,10 +21,10 @@ class StaticBlock extends BaseBlock {
   Widget buildBlock(BuildContext context, BlockProps props) {
     return Positioned(
       top:
-          (info.current ~/ props.mode) * (props.blockWidth + props.borderWidth),
+          (info!.current! ~/ props.mode!) * (props.blockWidth! + props.borderWidth!),
       left:
-          (info.current % props.mode) * (props.blockWidth + props.borderWidth),
-      child: NumberText(value: this.info.value, size: props.blockWidth),
+          (info!.current! % props.mode!) * (props.blockWidth! + props.borderWidth!),
+      child: NumberText(value: this.info!.value, size: props.blockWidth),
     );
   }
 }

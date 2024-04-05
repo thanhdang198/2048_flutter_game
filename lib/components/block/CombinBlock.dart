@@ -5,16 +5,16 @@ import 'package:flutter2048/components/block/MoveBlock.dart';
 import 'package:flutter2048/store/BlockInfo.dart';
 
 class CombinBlock extends BaseBlock {
-  final BlockInfo info;
-  final int mode;
-  final AnimationController moveController;
+  final BlockInfo? info;
+  final int? mode;
+  final AnimationController? moveController;
 
   CombinBlock({
-    Key key,
+    Key? key,
     this.info,
     this.mode,
     this.moveController,
-    AnimationController combinController,
+    required AnimationController combinController,
   }) : super(
           key: key,
           animation:
@@ -23,29 +23,29 @@ class CombinBlock extends BaseBlock {
 
   @override
   Widget buildBlock(BuildContext context, BlockProps props) {
-    Animation<double> animation = listenable;
+    Animation<double> animation = listenable as Animation<double>;
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
         MoveBlock(
           info: BlockInfo(
             isNew: false,
-            value: info.value ~/ 2,
-            before: info.before,
-            current: info.current,
+            value: info!.value! ~/ 2,
+            before: info!.before,
+            current: info!.current,
           ),
-          mode: mode,
-          controller: moveController,
+          mode: mode!,
+          controller: moveController!,
         ),
         Positioned(
-          top: (info.current ~/ props.mode) *
-              (props.blockWidth + props.borderWidth),
-          left: (info.current % props.mode) *
-              (props.blockWidth + props.borderWidth),
+          top: (info!.current! ~/ props.mode!) *
+              (props.blockWidth! + props.borderWidth!),
+          left: (info!.current! % props.mode!) *
+              (props.blockWidth! + props.borderWidth!),
           child: Transform.scale(
             scale: animation.value,
             origin: Offset(0.5, 0.5),
-            child: NumberText(value: this.info.value, size: props.blockWidth),
+            child: NumberText(value: this.info!.value, size: props.blockWidth),
           ),
         )
       ],

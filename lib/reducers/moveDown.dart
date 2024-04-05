@@ -3,7 +3,7 @@ import 'package:flutter2048/store/GameState.dart';
 class MoveDownAction {}
 
 GameState moveDown(GameState state, MoveDownAction action) {
-  if (state.status.end) return state.clone();
+  if (state.status!.end!) return state.clone();
 
   var clonestate = state.clone();
   var i, j, k;
@@ -11,7 +11,7 @@ GameState moveDown(GameState state, MoveDownAction action) {
   bool haveMove = false;
   bool haveCombin = false;
   for (i = 0; i < clonestate.mode; i++) {
-    j = k = clonestate.mode - 1;
+    j = k = clonestate.mode! - 1;
     while (true) {
       while (j > -1 && clonestate.getBlock(j, i).value == 0) j--;
       if (j < 0) break;
@@ -24,7 +24,7 @@ GameState moveDown(GameState state, MoveDownAction action) {
         clonestate.swapBlock(k * clonestate.mode + i, j * clonestate.mode + i);
       }
 
-      if (k < clonestate.mode - 1 &&
+      if (k < clonestate.mode! - 1 &&
           clonestate.getBlock(k, i).value ==
               clonestate.getBlock(k + 1, i).value &&
           !clonestate.getBlock(k + 1, i).needCombine) {
@@ -37,7 +37,7 @@ GameState moveDown(GameState state, MoveDownAction action) {
         prevBlock.needMove = true;
         prevBlock.needCombine = haveCombin = true;
         prevBlock.value <<= 1;
-        clonestate.status.scores += prevBlock.value;
+        clonestate.status!.scores += prevBlock.value;
         currentBlock.reset();
         currentBlock.current = currentBlock.before = k * clonestate.mode + i;
       } else {

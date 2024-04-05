@@ -17,7 +17,7 @@ class Playground extends StatelessWidget {
     return StoreConnector<GameState, PlaygroundProps>(
       converter: (store) {
         return PlaygroundProps(
-          end: store.state.status.end,
+          end: store.state.status!.end,
           mode: store.state.mode,
           startTime: 0,
           onDown: () => store.dispatch(MoveDownAction()),
@@ -63,38 +63,38 @@ class Playground extends StatelessWidget {
   }
 
   void onHorizontalDragEnd(DragEndDetails evt, PlaygroundProps props) {
-    if (DateTime.now().millisecondsSinceEpoch - props.startTime >
+    if (DateTime.now().millisecondsSinceEpoch - props.startTime! >
             pressTimeout ||
-        evt.primaryVelocity.abs() < dragLength) return;
+        evt.primaryVelocity!.abs() < dragLength) return;
 
-    if (evt.primaryVelocity > 0) {
-      props.onRight();
+    if (evt.primaryVelocity! > 0) {
+      props.onRight!();
     } else {
-      props.onLeft();
+      props.onLeft!();
     }
   }
 
   void onVerticalDragEnd(DragEndDetails evt, PlaygroundProps props) {
-    if (DateTime.now().millisecondsSinceEpoch - props.startTime >
+    if (DateTime.now().millisecondsSinceEpoch - props.startTime! >
             pressTimeout ||
-        evt.primaryVelocity.abs() < dragLength) return;
+        evt.primaryVelocity!.abs() < dragLength) return;
     // 是否ios和android纵轴是相反的？
-    if (evt.primaryVelocity < 0) {
-      props.onUp();
+    if (evt.primaryVelocity! < 0) {
+      props.onUp!();
     } else {
-      props.onDown();
+      props.onDown!();
     }
   }
 }
 
 class PlaygroundProps {
-  int mode;
-  bool end;
-  int startTime;
-  Function onLeft;
-  Function onRight;
-  Function onUp;
-  Function onDown;
+  int? mode;
+  bool? end;
+  int? startTime;
+  Function? onLeft;
+  Function? onRight;
+  Function? onUp;
+  Function? onDown;
 
   PlaygroundProps({
     this.end,

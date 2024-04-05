@@ -9,17 +9,17 @@ class Scores extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<GameState, ScoresProps>(
       converter: (store) => ScoresProps(
-        scores: store.state.status.scores,
-        total: store.state.status.total,
-        isEnd: store.state.status.end,
+        scores: store.state.status!.scores,
+        total: store.state.status!.total,
+        isEnd: store.state.status!.end,
         reset: () {
-          gameInit(store, store.state.mode);
+          gameInit(store, store.state.mode!);
         },
       ),
-      onDidChange: (props) {
-        if (props.isEnd && props.scores > props.total) {
+      onDidChange: (props, _) {
+        if (props!.isEnd! && props.scores! > props.total!) {
           SharedPreferences.getInstance().then((refs) {
-            refs.setInt('total_' + props.mode.toString(), props.scores);
+            refs.setInt('total_' + props.mode.toString(), props.scores!);
           });
         }
       },
@@ -111,10 +111,10 @@ class Scores extends StatelessWidget {
                     ),
                   ],
                 ),
-                FlatButton(
-                  color: Color(0xff8f7a66),
-                  textColor: Colors.white,
-                  onPressed: () => props.reset(),
+                ElevatedButton(
+                  // color: Color(0xff8f7a66),
+                  // textColor: Colors.white,
+                  onPressed: () => props.reset!(),
                   child: Text(
                     'New Game',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -132,9 +132,9 @@ class Scores extends StatelessWidget {
 class ScoresProps {
   ScoresProps({this.mode, this.total, this.scores, this.isEnd, this.reset});
 
-  int mode;
-  int total;
-  int scores;
-  bool isEnd;
-  Function reset;
+  int? mode;
+  int? total;
+  int? scores;
+  bool? isEnd;
+  Function? reset;
 }
